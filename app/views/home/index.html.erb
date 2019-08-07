@@ -1,2 +1,21 @@
 <h1>Stocks HomePage</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+
+<%= form_tag root_path, :method => 'POST' do %>
+    <%= text_field_tag 'ticker', nil, placeholder: "Enter Ticker Symbol", size: 50 %>
+    <%= submit_tag 'lookup' %>
+<% end %>
+
+<br/>
+
+<% if @stock %>
+    <%= @stock.iex_volume %>
+    <%= @stock.company_name %>
+    $<%= @stock.latest_price %>
+    <%= @stock.pe_ratio %>
+<% elsif @nothing %>
+    <%= @nothing %>
+<% end %>
+
+<% if @error %>
+    <%= @error %>
+<% end %>
