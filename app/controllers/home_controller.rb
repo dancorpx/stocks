@@ -9,6 +9,7 @@ class HomeController < ApplicationController
         @error = "Stock not found, enter another symbol"
       end
     end
+  
   end
 
   def about

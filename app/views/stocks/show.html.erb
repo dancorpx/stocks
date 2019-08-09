@@ -1,9 +1,26 @@
-
-<p>
-  <strong>Ticker:</strong>
-  <%= @stock.ticker %>
-</p>
-
-
-<%= link_to 'Edit', edit_stock_path(@stock) %> |
-<%= link_to 'Back', stocks_path %>
+<div class="col-md-6 offset-md-3">
+  <div class="jumbotron">
+   <% @ticker = StockQuote::Stock.quote(@stock.ticker) %>
+      <% if !@ticker %>
+        This symbol <%= @stocks.ticker %> does not exist.
+      <% else %>
+          <h2><%= @ticker.company_name %><br/></h2>
+          Ticker Symbol: <%= @ticker.symbol %><br/>
+          Current Price: $<%= number_with_precision(@ticker.latest_price, :precision => 2, :delimiter => ',')%></%><br/>
+          Previous Close: <%= number_with_precision(@ticker.previous_close, :precision => 2, :delimiter => ',') %><br/>
+          YTD Change: $<%= number_with_precision(@ticker.ytd_change, :precision => 2, :delimiter => ',')%><br/>
+          Market Cap: $<%= number_with_precision(@ticker.market_cap, :precision => 2, :delimiter => ',')%></%><br/>
+          
+        
+      <% end %>  
+      <br/> 
+      <% @logo = StockQuote::Stock.logo(@stock.ticker) %>
+      <img src="<%= @logo.url %>"/>
+      
+      <br/>
+      <br/>
+  <%= link_to 'Edit', edit_stock_path(@stock) %>
+  <br/><br/>
+  <%= link_to 'Back', stocks_path, class: "btn btn-secondary" %>
+  </div>
+  </div>

@@ -15,28 +15,16 @@
           <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          <%= link_to "Watchlist", stocks_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "Show Stocks", stocks_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Add Stocks", new_stock_path, class: "nav-link" %>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-        </li>
-      <% end %>
       
-        
+      <% end %>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <% if user_signed_in? %>    
+      <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-info my-2 my-sm-0" %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path, class: "btn btn-outline-success my-2 my-sm-0" %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline-info my-2 my-sm-0" %>
+    <% end %>
   </div>
 </nav>
