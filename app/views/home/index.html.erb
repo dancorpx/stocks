@@ -13,10 +13,10 @@
 <br/>
 
 <% if @stock %>
-    <%= @stock.iex_volume %>
-    <%= @stock.company_name %>
-    $<%= @stock.latest_price %>
-    <%= @stock.pe_ratio %>
+    <div class="jumbotron">
+        <strong><%= @stock.company_name %></strong>
+        $<%= @stock.latest_price %>
+    </div>
 <% elsif @nothing %>
     <%= @nothing %>
 <% end %>

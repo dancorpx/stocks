@@ -21,6 +21,8 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'mini_racer', platforms: :ruby
 # devise authentication
 gem 'devise', '~> 4.6', '>= 4.6.2'
+#dotenv
+gem 'dotenv-rails'
 ###stock quote gem
 gem 'stock_quote', '~> 3.0'
 # Use CoffeeScript for .coffee assets and views
