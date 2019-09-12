@@ -19,6 +19,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
+#rest-client for API calls
+gem 'rest-client', '~> 2.0.2'
 # devise authentication
 gem 'devise', '~> 4.6', '>= 4.6.2'
 #dotenv
