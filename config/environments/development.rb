@@ -72,4 +72,6 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+  #this will allow the custom error messages to be seen in dev mode
+  # config.exception_handler = { dev: true }
 end
