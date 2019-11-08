@@ -11,14 +11,7 @@
 <% end %>
 
 <br/>
-<h1>
-<% @response = RestClient::Request.execute(
-    method: :get, 
-    url: "https://cloud.iexapis.com/stable/stock/aapl/quote?token=pk_90dd9d4ea08c4c30a8ee233df365eaad")
-%>
-    
-<%= @response %>
-</h1>
+
 <% if @stock %>
     <div class="jumbotron">
         <strong><%= @stock.company_name %></strong>
