@@ -1,10 +1,8 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#jumbo2 {
-  // display: flex;
-  // flex-direction: row;
-  
+.jumbotron {
+  background-color: #EDF5E1;
 }
 #headerText {
   // border: solid red;
@@ -21,4 +19,8 @@
 
 .stockImg {
   // border: solid red;
+}
+
+.navbar {
+  // border: solid darkgray;
 }

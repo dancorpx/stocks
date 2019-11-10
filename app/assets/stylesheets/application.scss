@@ -11,8 +11,37 @@
  * It is generally better to create a new file per style scope.
  *
  */
+ 
 @import "bootstrap";
 @import "home";
 .btn {
     margin-left: 5px;
+}
+
+body {
+    background: #5cdb95;
+    color: #05386B;
+    font-family: 'raleway', sans-serif;
+    // #5cdb95;
+}
+.navbar {
+    background-color: #5cdb95;
+    color: #05386B;
+    // #05386B;
+    // #8EE4AF;
+    // 
+}
+
+.btn-success {
+    background-color: #379683;
+    border: #379683;
+}
+.btn-info {
+    background-color: #05386B;
+    border: #05386B;
+}
+// Devise views
+#deviseJumbo {
+    background: #05386B;
+    color: #EDF5E1;
 }
