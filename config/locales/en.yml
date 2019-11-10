@@ -30,4 +30,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+    exception_handler:
+    not_found:              "Your message here" # -> 404 page
+    unauthorized:           "You need to login to continue"
+    internal_server_error:  "This is a test to show the %{status} of the error"

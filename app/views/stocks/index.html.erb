@@ -5,7 +5,8 @@
         <th>Ticker</th>
         <th>Current Price</th>
         <th>Market Cap</th>
-        <th colspan="2"></th>
+        <th>Day Change</th>
+        <th colspan="1"></th>
       </tr>
     </thead>
 
@@ -13,7 +14,13 @@
       <% @stocks.each do |stock| %>
         <% if stock.user_id == current_user.id %>
           
-        <% @ticker = StockQuote::Stock.quote(stock.ticker) %>
+
+
+        <% @url = "https://cloud.iexapis.com/stable/stock/" + stock.ticker + "/quote?token=pk_90dd9d4ea08c4c30a8ee233df365eaad" %>
+        <% @uri = URI(@url) %>
+        <% @response = Net::HTTP.get_response(@uri) %>
+        <% @ticker = JSON.parse(@response.body) %>
+          <% @price = @ticker['latest_price'] %>
             <% if !@ticker %>
               <tr>
                 <td><%= link_to "Error", stock %></td>
@@ -25,11 +32,11 @@
               </tr>
             <% else %>
               <tr>
-                <td><%= link_to @ticker.company_name, stock %></td>
-                <td><%= @ticker.symbol %></td>
-                <td>$<%= number_with_precision(@ticker.latest_price, :precision => 2, :delimiter => ',')%></%></td>
-                <td>$<%= number_with_precision(@ticker.market_cap, :precision => 2, :delimiter => ',')%></%></td>
-                <td><center><%= link_to 'Edit', edit_stock_path(stock) %></center></td>
+                <td><%= link_to @ticker['companyName'], stock %></td>
+                <td><%= @ticker['symbol'] %></td>
+                <td>$<%= number_with_precision(@ticker['latestPrice'], :precision => 2, :delimiter => ',') %></%><%= @price %></td>
+                <td>$<%= number_with_precision(@ticker['marketCap'], :precision => 2, :delimiter => ',')%></%></td>
+                <td><%= @ticker['changePercent'] %>%</td>
                 <td><center><%= link_to 'Delete', stock, method: :delete, data: { confirm: 'Are you sure?' } %></center></td>
               </tr>
             <% end %>   

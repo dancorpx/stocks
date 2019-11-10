@@ -1,28 +1,41 @@
-<div class="col-md-6 offset-md-3">
-<div class="jumbotron">
-<center><h1>Stocks HomePage</h1>
-<p>Quickly check a stock price by typing the ticker Symbol.</p></center>
-<br/>
-<%= form_tag root_path, :method => 'POST' do %>
-    <%= text_field_tag 'ticker', nil, placeholder: "Enter Ticker Symbol", size: 50, class: "form-control" %>
-    <br/>
-    <center><%= submit_tag 'Lookup', class: "btn btn-secondary" %></center>
+<center><h1>Stocks HomePage</h1></center>
+            <br/>
+<div class="row">
+    <div class="col-md-6">
+        <div class="jumbotron">
+        <em>Quickly check a stock price by typing the ticker <strong>Symbol</strong></em><br/><br/>
+            <%= form_tag root_path, :method => 'POST' do %>
+                <%= text_field_tag 'ticker', nil, placeholder: "Enter Ticker Symbol", size: 50, class: "form-control" %>
+                <br/>
+                <center><%= submit_tag 'Lookup', class: "btn btn-secondary" %></center>
+            <% end %>
+        </div>
     </div>
-<% end %>
 
-<br/>
-
-<% if @stock %>
-    <div class="jumbotron">
-        <strong><%= @stock.company_name %></strong>
-        $<%= @stock.latest_price %>
+<div class="col-md-6">
+    <div class="jumbotron" id="jumbo2" style="height: 34vh;">
+    <em id="headerText">Company Information:</em><br/><br/>
+        <% if @nothing %>
+           <%= @nothing %>     
+        <% else %>
+            <div class="compInfo">
+                <div class="stockInfo">
+                    <strong><%= @symbol %></strong><br/>    
+                    <%= @companyName %><br/>   
+                    <%= @latestPrice %><br/>
+                    <%= @changePercent %><br/>
+                    <%= @primaryExchange %><br/>
+                </div>
+                <div class="stockImg">
+                    <img class="stockLogo" src="<%= @logoUrlOutput %>"/>
+                </div>
+            </div>
+        <% end %>
+        
+        <% if @error %>
+            <%= @error %>
+        <% end %>
+        </div>
+    
     </div>
-<% elsif @nothing %>
-    <%= @nothing %>
-<% end %>
-
-<% if @error %>
-    <%= @error %>
-<% end %>
-</div>
 </div>
