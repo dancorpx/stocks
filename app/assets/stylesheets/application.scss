@@ -19,14 +19,14 @@
 }
 
 body {
-    background: #5cdb95;
-    color: #05386B;
+    background: #E8A87B;
+    color: black;
     font-family: 'raleway', sans-serif;
     // #5cdb95;
 }
 .navbar {
-    background-color: #5cdb95;
-    color: #05386B;
+    background-color: #E8A87B;
+    color: black;
     // #05386B;
     // #8EE4AF;
     // 
@@ -40,8 +40,14 @@ body {
     background-color: #05386B;
     border: #05386B;
 }
+.btn-secondary {
+    background-color: #C38D9D;
+    border: #C38D9D;
+}
+
 // Devise views
 #deviseJumbo {
-    background: #05386B;
-    color: #EDF5E1;
+    background: #E27D5F;
+    color: black;
+    box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.2);
 }
