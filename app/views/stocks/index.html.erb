@@ -19,18 +19,19 @@
         <% @url = "https://cloud.iexapis.com/stable/stock/" + stock.ticker + "/quote?token=pk_90dd9d4ea08c4c30a8ee233df365eaad" %>
         <% @uri = URI(@url) %>
         <% @response = Net::HTTP.get_response(@uri) %>
-        <% @ticker = JSON.parse(@response.body) %>
+        <% if @response.body == "Unknown symbol" %>
+          <tr>
+            <td><%= link_to "Error", stock %></td>
+            <td><%= stock.ticker %></td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td><center><%= link_to 'Edit', edit_stock_path(stock) %></center></td>
+            <td><center><%= link_to 'Delete', stock, method: :delete, data: { confirm: 'Are you sure?' } %></center></td>
+          </tr>
+        <% else %>  
+          <% @ticker = JSON.parse(@response.body) %>
           <% @price = @ticker['latest_price'] %>
-            <% if !@ticker %>
-              <tr>
-                <td><%= link_to "Error", stock %></td>
-                <td><%= stock.ticker %></td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td><center><%= link_to 'Edit', edit_stock_path(stock) %></center></td>
-                <td><center><%= link_to 'Delete', stock, method: :delete, data: { confirm: 'Are you sure?' } %></center></td>
-              </tr>
-            <% else %>
+    
               <tr>
                 <td><%= link_to @ticker['companyName'], stock %></td>
                 <td><%= @ticker['symbol'] %></td>
@@ -39,8 +40,8 @@
                 <td><%= @ticker['changePercent'] %>%</td>
                 <td><center><%= link_to 'Delete', stock, method: :delete, data: { confirm: 'Are you sure?' } %></center></td>
               </tr>
-            <% end %>   
-          <% end %>
+        <% end %>   
+        <% end %>
       <% end %>
     </tbody>
   </table>

@@ -1,26 +1,34 @@
 <div class="col-md-6 offset-md-3">
   <div class="jumbotron">
-   <% @ticker = StockQuote::Stock.quote(@stock.ticker) %>
-      <% if !@ticker %>
-        This symbol <%= @stocks.ticker %> does not exist.
-      <% else %>
-          <h2><%= @ticker.company_name %><br/></h2>
-          Ticker Symbol: <%= @ticker.symbol %><br/>
-          Current Price: $<%= number_with_precision(@ticker.latest_price, :precision => 2, :delimiter => ',')%></%><br/>
-          Previous Close: <%= number_with_precision(@ticker.previous_close, :precision => 2, :delimiter => ',') %><br/>
-          YTD Change: $<%= number_with_precision(@ticker.ytd_change, :precision => 2, :delimiter => ',')%><br/>
-          Market Cap: $<%= number_with_precision(@ticker.market_cap, :precision => 2, :delimiter => ',')%></%><br/>
+    <% @url = "https://cloud.iexapis.com/stable/stock/" + @stock.ticker + "/quote?token=pk_90dd9d4ea08c4c30a8ee233df365eaad" %>
+    <% @uri = URI(@url) %>
+    <% @response = Net::HTTP.get_response(@uri) %>
+    <% if @response.body == "Unknown symbol" %>
+        <% @error = "This symbol does not exist." %>
+    <% else %>
+        <% @ticker = JSON.parse(@response.body) %>
+        <center><h2><strong><%= @ticker['companyName'] %></center></strong></h2>
+        <center>Ticker Symbol: <%= @ticker['symbol'] %></center>
+        <center>Current Price: $<%= number_with_precision(@ticker['latestPrice'], :precision => 2, :delimiter => ',')%></%></center>
+        <center>Previous Close: <%= number_with_precision(@ticker['previousClose'], :precision => 2, :delimiter => ',') %></center>
+        <center>YTD Change: $<%= number_with_precision(@ticker['ytdChange'], :precision => 2, :delimiter => ',')%></center>
+        <center>Market Cap: $<%= number_with_precision(@ticker['marketCap'], :precision => 2, :delimiter => ',')%></%></center>
           
-        
-      <% end %>  
-      <br/> 
-      <% @logo = StockQuote::Stock.logo(@stock.ticker) %>
-      <img src="<%= @logo.url %>"/>
+        <% @logoUrl = "https://cloud.iexapis.com/stable/stock/" + @stock.ticker + "/logo?token=pk_90dd9d4ea08c4c30a8ee233df365eaad" %> 
+        <% @logoUri = URI(@logoUrl) %>
+        <% @logoResponse = Net::HTTP.get(@logoUri) %>
+        <% @logoOutput = JSON.parse(@logoResponse) %>
+    <% end %>  
+      <br/>
+      <% if @ticker %> 
+        <center><img src="<%= @logoOutput['url'] %>"/></center>
+      <% else %>
+        <%= @error %>
+        <br/>
+      <% end %>
+      <br/>
       
-      <br/>
-      <br/>
-  <%= link_to 'Edit', edit_stock_path(@stock) %>
-  <br/><br/>
-  <%= link_to 'Back', stocks_path, class: "btn btn-secondary" %>
+
+  <%= link_to 'Back', stocks_path, class: "btn btn-info" %>
   </div>
   </div>

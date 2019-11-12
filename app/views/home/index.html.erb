@@ -17,7 +17,7 @@
     <em id="headerText">Company Information:</em><br/><br/>
         <% if @nothing %>
            <%= @nothing %>     
-        <% else %>
+        <% elsif @output%>
             <div class="compInfo">
                 <div class="stockInfo">
                     <strong><%= @symbol %></strong><br/>    
@@ -30,12 +30,9 @@
                     <img class="stockLogo" src="<%= @logoUrlOutput %>"/>
                 </div>
             </div>
-        <% end %>
-        
-        <% if @error %>
+        <% else @error %>
             <%= @error %>
         <% end %>
         </div>
-    
     </div>
 </div>
